@@ -1,0 +1,10 @@
+{
+  "name": "SoulTypes MBTI",
+  "short_name": "SoulTypes",
+  "description": "MBTI 유형별 주요 특징과 영성적 특징을 정리해주는 모바일 앱",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fbfcf8",
+  "theme_color": "#284b3a",
+  "icons": []
+}
