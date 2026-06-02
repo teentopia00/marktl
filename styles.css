@@ -89,6 +89,7 @@ h1 {
 
 .selector,
 .guide,
+.sources,
 .result-card {
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -273,20 +274,38 @@ ul {
   font-weight: 800;
 }
 
-.guide {
+.guide,
+.sources {
   margin-top: 16px;
   padding: 16px;
 }
 
-.guide h2 {
+.guide h2,
+.sources h2 {
   color: var(--moss);
   font-size: 1.08rem;
 }
 
-.guide p {
+.guide p,
+.sources p {
   margin-top: 8px;
   color: var(--muted);
   line-height: 1.65;
+}
+
+.sources ul {
+  margin-top: 8px;
+}
+
+.sources li {
+  color: #36423d;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.sources cite {
+  font-style: normal;
+  font-weight: 800;
 }
 
 @media (min-width: 700px) {
