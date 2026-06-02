@@ -1,0 +1,300 @@
+:root {
+  color-scheme: light;
+  --ink: #18201d;
+  --muted: #64706a;
+  --line: #dce3de;
+  --paper: #fbfcf8;
+  --panel: #ffffff;
+  --sage: #6f8f7b;
+  --moss: #284b3a;
+  --clay: #b76f47;
+  --gold: #d6a64f;
+  --blue: #4c6f91;
+  --rose: #b05c6b;
+  --shadow: 0 16px 40px rgba(34, 48, 42, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    linear-gradient(135deg, rgba(111, 143, 123, 0.22), transparent 34%),
+    linear-gradient(315deg, rgba(214, 166, 79, 0.18), transparent 38%),
+    var(--paper);
+  color: var(--ink);
+  font-family:
+    "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, -apple-system, sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.app-shell {
+  width: min(100%, 520px);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: max(18px, env(safe-area-inset-top)) 16px max(28px, env(safe-area-inset-bottom));
+}
+
+.hero {
+  padding: 24px 2px 18px;
+}
+
+.brand-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--moss);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.mark {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--moss);
+  color: #fff;
+  letter-spacing: 0;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  max-width: 11ch;
+  margin-top: 18px;
+  font-size: clamp(2.28rem, 15vw, 4.2rem);
+  line-height: 0.96;
+  letter-spacing: 0;
+}
+
+.hero p {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.68;
+}
+
+.selector,
+.guide,
+.result-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: var(--shadow);
+}
+
+.selector {
+  padding: 15px;
+}
+
+.selector label {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.search-row {
+  display: grid;
+  grid-template-columns: 1fr 42px;
+  gap: 8px;
+}
+
+input {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0 14px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 1.08rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+input:focus {
+  border-color: var(--sage);
+  outline: 3px solid rgba(111, 143, 123, 0.18);
+}
+
+#clear-search {
+  min-height: 48px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--muted);
+  font-size: 1.45rem;
+}
+
+.type-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.type-button {
+  min-height: 48px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--moss);
+  font-weight: 900;
+}
+
+.type-button[aria-pressed="true"] {
+  border-color: var(--moss);
+  background: var(--moss);
+  color: #fff;
+}
+
+.result {
+  margin-top: 16px;
+}
+
+.result-card {
+  overflow: hidden;
+}
+
+.result-head {
+  position: relative;
+  padding: 18px;
+  background: var(--accent, var(--moss));
+  color: #fff;
+}
+
+.result-head h2 {
+  font-size: 2.7rem;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.result-head p {
+  max-width: 28ch;
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.55;
+}
+
+.path-wheel {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+  margin-top: 16px;
+}
+
+.path-wheel span {
+  min-height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.12);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.content {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+}
+
+.block {
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.block:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.block h3 {
+  margin: 0 0 8px;
+  color: var(--moss);
+  font-size: 0.98rem;
+}
+
+.block p,
+.block li {
+  color: #36423d;
+  font-size: 0.96rem;
+  line-height: 1.65;
+}
+
+.path-block p + p,
+.reset-note {
+  margin-top: 8px;
+}
+
+.path-block strong {
+  color: var(--accent, var(--moss));
+}
+
+.reset-note {
+  border-left: 3px solid var(--accent, var(--moss));
+  padding-left: 10px;
+  color: var(--muted);
+}
+
+ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.chip {
+  border-radius: 999px;
+  padding: 7px 10px;
+  background: #edf2ee;
+  color: var(--moss);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.guide {
+  margin-top: 16px;
+  padding: 16px;
+}
+
+.guide h2 {
+  color: var(--moss);
+  font-size: 1.08rem;
+}
+
+.guide p {
+  margin-top: 8px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+@media (min-width: 700px) {
+  .app-shell {
+    padding-top: 34px;
+  }
+
+  h1 {
+    max-width: 14ch;
+  }
+}
