@@ -1,6 +1,6 @@
 {
-  "name": "SoulTypes MBTI",
-  "short_name": "SoulTypes",
+  "name": "MBTI와 나의 영성유형 진단",
+  "short_name": "영성유형 진단",
   "description": "MBTI 유형별 주요 특징과 영성적 특징을 정리해주는 모바일 앱",
   "start_url": "./index.html",
   "display": "standalone",
