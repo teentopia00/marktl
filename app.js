@@ -113,6 +113,53 @@ const common = {
   P: "열린 흐름, 즉흥성, 탐색 속에서 생기가 살아남",
 };
 
+const quizAxes = [
+  {
+    id: "energy",
+    code: "E-I",
+    question: "나는 에너지를 어디서 얻는가?",
+    description:
+      "에너지 방향은 내가 힘을 회복하고 생각이 살아나는 자리를 말합니다. 외향형은 사람, 활동, 대화, 현장 경험 속에서 활력을 얻기 쉽고, 내향형은 고요함, 혼자만의 시간, 깊은 생각과 내면 정리 속에서 힘을 회복하기 쉽습니다.",
+    choices: [
+      { letter: "E", label: "외향", text: "사람들과 대화하고 함께 움직일 때 생각과 에너지가 살아난다." },
+      { letter: "I", label: "내향", text: "혼자 생각하고 조용히 정리할 때 마음과 에너지가 회복된다." },
+    ],
+  },
+  {
+    id: "info",
+    code: "S-N",
+    question: "나는 정보를 어떻게 받아들이는가?",
+    description:
+      "정보 인식 방식은 내가 무엇을 먼저 알아차리고 신뢰하는지를 보여줍니다. 감각형은 실제 경험, 구체적 사실, 몸으로 확인되는 현실에 강하고, 직관형은 가능성, 상징, 의미, 보이지 않는 연결을 빠르게 읽습니다.",
+    choices: [
+      { letter: "S", label: "감각", text: "실제 사례, 구체적인 설명, 지금 눈앞의 현실이 먼저 와닿는다." },
+      { letter: "N", label: "직관", text: "큰 그림, 의미, 가능성, 상징적 연결이 먼저 떠오른다." },
+    ],
+  },
+  {
+    id: "decision",
+    code: "T-F",
+    question: "나는 무엇을 기준으로 판단하는가?",
+    description:
+      "판단 기준은 결정을 내릴 때 무엇을 더 중요하게 붙드는지를 말합니다. 사고형은 원칙, 논리, 일관성, 진실성을 중시하고, 감정형은 관계, 가치, 공감, 사람에게 미치는 영향을 중요하게 봅니다.",
+    choices: [
+      { letter: "T", label: "사고", text: "원칙과 논리, 무엇이 맞는지 따져본 뒤 결정하는 편이다." },
+      { letter: "F", label: "감정", text: "사람의 마음과 관계, 무엇이 더 따뜻하고 의미 있는지 살핀다." },
+    ],
+  },
+  {
+    id: "lifestyle",
+    code: "J-P",
+    question: "나는 삶을 어떻게 정리하는가?",
+    description:
+      "생활 방식은 내가 세상과 일정을 다루는 기본 리듬을 보여줍니다. 판단형은 계획, 마감, 질서, 예측 가능성 안에서 안정감을 느끼고, 인식형은 여유, 즉흥성, 열린 선택지, 유연한 흐름 속에서 생기가 살아납니다.",
+    choices: [
+      { letter: "J", label: "판단", text: "미리 정하고 계획대로 진행될 때 마음이 편하다." },
+      { letter: "P", label: "인식", text: "상황에 맞게 열어두고 유연하게 움직일 때 더 자연스럽다." },
+    ],
+  },
+];
+
 const data = {
   ISTJ: {
     name: "신실한 보존자",
@@ -209,7 +256,7 @@ const data = {
     spiritual:
       "봉사 현장, 선교적 실천, 몸을 쓰는 활동, 즉각적인 필요에 반응하는 자리에서 신앙이 살아납니다.",
     alienation:
-      "긴 이론 강의와 정적인 프로그램만 이어지면 영성이 멀고 지루한 것으로 느낄 수 있습니다.",
+      "긴 이론 강의와 정적인 프로그램만 이어지면 영성이 멀고 지루한 것으로 느껴질 수 있습니다.",
     practices: ["현장 봉사", "짧은 행동 기도", "응급 돌봄 참여", "운동과 묵상 결합"],
     growth: "속도와 담대함에 깊은 성찰을 더하면 영향력이 오래갑니다. 행동 뒤에 짧은 회고를 붙여 보세요.",
   },
@@ -369,6 +416,59 @@ function renderResult(type) {
   renderButtons(type);
 }
 
+function renderQuiz() {
+  const form = document.querySelector("#quiz-form");
+  if (!form) return;
+  form.innerHTML = quizAxes
+    .map(
+      (axis) => `
+        <section class="quiz-axis" aria-labelledby="${axis.id}-title">
+          <h3 id="${axis.id}-title">${axis.question} <span class="axis-code">(${axis.code})</span></h3>
+          <p class="axis-description">${axis.description}</p>
+          <div class="choice-pair">
+            ${axis.choices
+              .map(
+                (choice) => `
+                  <button class="choice-button" type="button" data-axis="${axis.id}" data-letter="${choice.letter}" aria-pressed="false">
+                    <span class="choice-letter">${choice.letter}</span>
+                    <strong>${choice.label}</strong> ${choice.text}
+                  </button>
+                `,
+              )
+              .join("")}
+          </div>
+        </section>
+      `,
+    )
+    .join("");
+}
+
+function updateQuizResult() {
+  const answers = quizAxes.map((axis) => {
+    const selected = document.querySelector(`.choice-button[data-axis="${axis.id}"][aria-pressed="true"]`);
+    return selected ? selected.dataset.letter : "";
+  });
+  const result = document.querySelector("#quiz-result");
+  if (!result) return;
+
+  if (answers.some((letter) => !letter)) {
+    result.classList.remove("is-ready");
+    result.innerHTML = "";
+    return;
+  }
+
+  const type = answers.join("");
+  input.value = type;
+  renderResult(type);
+  result.classList.add("is-ready");
+  result.innerHTML = `
+    <strong>${type}</strong>
+    <p>당신의 약식 결과는 ${type}입니다. 아래 해석은 이 결과를 바탕으로, 당신에게 자연스러운 영성의 길과 성장 포인트를 보여줍니다.</p>
+    <p>이 결과는 자기 이해를 돕는 참고용입니다. 사람은 한 유형 안에 갇히지 않으며, 영적 성숙은 익숙한 길에서 출발해 낯선 기능까지 통합해 가는 과정입니다.</p>
+  `;
+  document.querySelector("#result").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 function normalizeType(value) {
   return value.toUpperCase().replace(/[^A-Z]/g, "").slice(0, 4);
 }
@@ -376,6 +476,7 @@ function normalizeType(value) {
 const input = document.querySelector("#type-search");
 const clear = document.querySelector("#clear-search");
 
+renderQuiz();
 renderResult("INFJ");
 input.value = "INFJ";
 
@@ -397,4 +498,14 @@ document.querySelector("#type-grid").addEventListener("click", (event) => {
   input.value = button.dataset.type;
   renderResult(button.dataset.type);
   document.querySelector("#result").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+document.querySelector("#quiz-form")?.addEventListener("click", (event) => {
+  const button = event.target.closest(".choice-button");
+  if (!button) return;
+  document
+    .querySelectorAll(`.choice-button[data-axis="${button.dataset.axis}"]`)
+    .forEach((choice) => choice.setAttribute("aria-pressed", "false"));
+  button.setAttribute("aria-pressed", "true");
+  updateQuizResult();
 });
