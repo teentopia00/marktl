@@ -30,8 +30,7 @@ body {
     "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, -apple-system, sans-serif;
 }
 
-button,
-input {
+button {
   font: inherit;
 }
 
@@ -87,7 +86,6 @@ h1 {
   line-height: 1.68;
 }
 
-.selector,
 .quick-test,
 .guide,
 .sources,
@@ -98,12 +96,7 @@ h1 {
   box-shadow: var(--shadow);
 }
 
-.selector {
-  padding: 15px;
-}
-
 .quick-test {
-  margin-top: 16px;
   padding: 16px;
 }
 
@@ -220,69 +213,6 @@ h1 {
   margin-top: 6px;
   color: #36423d;
   line-height: 1.58;
-}
-
-.selector label {
-  display: block;
-  margin-bottom: 9px;
-  color: var(--muted);
-  font-size: 0.85rem;
-  font-weight: 800;
-}
-
-.search-row {
-  display: grid;
-  grid-template-columns: 1fr 42px;
-  gap: 8px;
-}
-
-input {
-  width: 100%;
-  min-height: 48px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 0 14px;
-  background: #fff;
-  color: var(--ink);
-  font-size: 1.08rem;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-input:focus {
-  border-color: var(--sage);
-  outline: 3px solid rgba(111, 143, 123, 0.18);
-}
-
-#clear-search {
-  min-height: 48px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: #fff;
-  color: var(--muted);
-  font-size: 1.45rem;
-}
-
-.type-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin-top: 12px;
-}
-
-.type-button {
-  min-height: 48px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: #fff;
-  color: var(--moss);
-  font-weight: 900;
-}
-
-.type-button[aria-pressed="true"] {
-  border-color: var(--moss);
-  background: var(--moss);
-  color: #fff;
 }
 
 .result {
