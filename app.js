@@ -1,22 +1,3 @@
-const typeOrder = [
-  "ISTJ",
-  "ISFJ",
-  "INFJ",
-  "INTJ",
-  "ISTP",
-  "ISFP",
-  "INFP",
-  "INTP",
-  "ESTP",
-  "ESFP",
-  "ENFP",
-  "ENTP",
-  "ESTJ",
-  "ESFJ",
-  "ENFJ",
-  "ENTJ",
-];
-
 const accentByTemperament = {
   SJ: "#4f735f",
   SP: "#9a6845",
@@ -346,24 +327,11 @@ function temperament(type) {
   return "NT";
 }
 
-function renderButtons(selected) {
-  const grid = document.querySelector("#type-grid");
-  grid.innerHTML = typeOrder
-    .map(
-      (type) =>
-        `<button class="type-button" type="button" data-type="${type}" aria-pressed="${
-          type === selected
-        }">${type}</button>`,
-    )
-    .join("");
-}
-
 function renderResult(type) {
   const item = data[type];
   const result = document.querySelector("#result");
   if (!item) {
     result.innerHTML = "";
-    renderButtons("");
     return;
   }
 
@@ -413,7 +381,6 @@ function renderResult(type) {
       </div>
     </article>
   `;
-  renderButtons(type);
 }
 
 function renderQuiz() {
@@ -458,7 +425,6 @@ function updateQuizResult() {
   }
 
   const type = answers.join("");
-  input.value = type;
   renderResult(type);
   result.classList.add("is-ready");
   result.innerHTML = `
@@ -469,36 +435,7 @@ function updateQuizResult() {
   document.querySelector("#result").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-function normalizeType(value) {
-  return value.toUpperCase().replace(/[^A-Z]/g, "").slice(0, 4);
-}
-
-const input = document.querySelector("#type-search");
-const clear = document.querySelector("#clear-search");
-
 renderQuiz();
-renderResult("INFJ");
-input.value = "INFJ";
-
-input.addEventListener("input", (event) => {
-  const next = normalizeType(event.target.value);
-  input.value = next;
-  if (next.length === 4) renderResult(next);
-});
-
-clear.addEventListener("click", () => {
-  input.value = "";
-  input.focus();
-  renderResult("");
-});
-
-document.querySelector("#type-grid").addEventListener("click", (event) => {
-  const button = event.target.closest("[data-type]");
-  if (!button) return;
-  input.value = button.dataset.type;
-  renderResult(button.dataset.type);
-  document.querySelector("#result").scrollIntoView({ behavior: "smooth", block: "start" });
-});
 
 document.querySelector("#quiz-form")?.addEventListener("click", (event) => {
   const button = event.target.closest(".choice-button");
